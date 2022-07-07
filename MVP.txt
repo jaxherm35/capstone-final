@@ -1,0 +1,16 @@
+This application will be a data base for solar sales to store information about prospective sales as well as completed sales
+
+MVP
+
+Users will have their own profile to store information
+Two seperate tables for sets/bids and completed sales
+Ability to add and delete rows/clients from tables
+Ability to sort tables by rows and columns
+Ability to add notes to the table to reference what was talked about with clients
+Monthly bill calculator
+
+
+Future features
+
+Search bar for users to look for specific customers
+Ways for rep to add external documentation to database (permits, docs, etc...)
