@@ -1,0 +1,43 @@
+set up env
+
+set up sql alchemy route
+
+build model db 
+    sits
+        name
+        address
+        phone number
+        email
+        avg bill price
+        total kwh
+        new price with paydown
+        new price without paydown
+        offset %
+        # of panels
+    sales
+        name
+        address
+        phone number
+        email
+        avg bill price
+        total kwh
+        new price with paydown
+        new price without paydown
+        offset %
+        # of panels
+        loan provider
+        interest rate
+        date sold
+
+html login page
+
+html home/welcome page (links up top for return to home, sits, sales, and bill calculator)
+html page for sit database
+html page for sale database
+html page for bill calculator
+
+need to decide if i want to put a primary key for the customer on the set db to carry over to the sale db
+need to figure out how to properly formal table data in html
+
+
+
