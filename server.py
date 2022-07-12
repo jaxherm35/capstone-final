@@ -6,6 +6,7 @@ from model import connect_to_db
 
 
 app = Flask(__name__)
+app.secret_key = "very_secret_key"
 
 if __name__ == '__main__':
     app.env = 'development'
