@@ -4,7 +4,8 @@ from unicodedata import name
 from flask_sqlalchemy import SQLAlchemy
 from flask import Flask
 from sqlalchemy import PrimaryKeyConstraint
-from server import app
+from flask_debugtoolbar import DebugToolbarExtension
+# from server import app
 
 db = SQLAlchemy()
 
@@ -103,12 +104,12 @@ class Sold(db.Model):
 def connect_to_db(app):
     app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://Jaxson:sqlpassword@localhost:5432/capstone-final'
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-    db.app= app
+    db.app = app
     db.init_app(app)
 
 
 if __name__ == "__main__":
-    db.create_all()
+    app = Flask(__name__)
     connect_to_db(app)
+    db.create_all()
     print("Connected to database")
-
