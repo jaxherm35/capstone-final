@@ -1,6 +1,6 @@
 # from xmlrpc.client import _HostType
 import re
-from flask import Flask, render_template
+from flask import Flask, redirect, render_template, url_for
 from flask_debugtoolbar import DebugToolbarExtension
 import jinja2
 from model import connect_to_db
@@ -19,14 +19,21 @@ if __name__ == '__main__':
     app.run(port=5432, host='localhost', debug=True)    
 
 
-@app.route('/')
+@app.route('/', methods=['GET', 'POST'])
 def login():
     return render_template('login.html')
 
-@app.route('/home')
+@app.route('/home', methods=['GET'])
 def home():
-        return render_template('home.html')
+    test = ['test 1 ', 'test 2 ', 'test 3']
+    return render_template('home.html', test=test)
 
 @app.route('/sales', methods=['GET', 'POST'])
-def sales_page():
-        return render_template('sales.html')
+def sales():
+    # return redirect(url_for('sales_page'))
+    return render_template('sales.html')
+
+@app.route('/sits', methods=['GET', 'POST'])
+def sits():
+    # return redirect(url_for('sits_page'))
+    return render_template('sits.html')

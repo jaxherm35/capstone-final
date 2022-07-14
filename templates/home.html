@@ -10,7 +10,9 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <title>Homepage</title>
 </head>
+{% block content %}
 <body>
+    <header>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <a class="navbar-brand" href="#">Navbar</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -20,10 +22,16 @@
           <div class="navbar-nav">
             <a class="nav-item nav-link active" href="#">Home <span class="sr-only">(current)</span></a>
             <a class="nav-item nav-link" href="#">Sits</a>
-            <a class="nav-item nav-link" href="#">Sales</a>
-            
+            <a class="nav-item nav-link" href="#">Sales</a>            
           </div>
         </div>
+    </header>
+        {% for test in test %} 
+        <h1>
+            {{ test }}
+        </h1>
+        {% endfor %}
       </nav>
 </body>
+{% endblock %}
 </html>
