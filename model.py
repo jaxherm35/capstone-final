@@ -32,6 +32,8 @@ class User(db.Model):
         self.name = name
         self.email = email
 
+class UserForm()
+
 
 class Sits(db.Model):
 

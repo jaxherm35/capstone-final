@@ -4,6 +4,7 @@ from flask import Flask, redirect, render_template, url_for
 from flask_debugtoolbar import DebugToolbarExtension
 import jinja2
 from model import connect_to_db
+from flask_wtf import AddForm 
 
 
 
@@ -23,15 +24,20 @@ if __name__ == '__main__':
 def login():
     return render_template('login.html')
 
+
 @app.route('/home', methods=['GET'])
 def home():
     test = ['test 1 ', 'test 2 ', 'test 3']
     return render_template('home.html', test=test)
 
+
 @app.route('/sales', methods=['GET', 'POST'])
-def sales():
+def add_sales():
+
+    # form = AddForm()
     # return redirect(url_for('sales_page'))
     return render_template('sales.html')
+
 
 @app.route('/sits', methods=['GET', 'POST'])
 def sits():
