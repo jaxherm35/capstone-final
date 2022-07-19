@@ -30,21 +30,21 @@ class AddHomeowner(FlaskForm):
 
 class AddSit(FlaskForm):
 
-    new_price_with = IntegerField()
-    new_price_without = IntegerField()
-    offset = IntegerField()
-    panels = IntegerField()
-    notes = StringField()
+    new_price_with = IntegerField('New price with tax return paydown')
+    new_price_without = IntegerField('New price without tax return paydown')
+    offset = IntegerField('Offset percentage')
+    panels = IntegerField('Total number of panels')
+    notes = StringField('Homeowner notes')
 
 
 class AddSale(FlaskForm):
 
-    new_price_with = IntegerField()
-    new_price_without = IntegerField()
-    offset = IntegerField()
-    panels = IntegerField()
-    loan_provider = StringField()
-    interest_rate = StringField()
-    re_roof = BooleanField()
-    date_sold = StringField()
-    notes = StringField()
+    new_price_with = IntegerField('New price with tax return paydown')
+    new_price_without = IntegerField('New price without tax return paydown')
+    offset = IntegerField('Offset percentage')
+    panels = IntegerField('Total number of panels')
+    loan_provider = StringField('Loan provider')
+    interest_rate = StringField('Interest rate')
+    re_roof = BooleanField('Requires re-roof')
+    date_sold = StringField('Date sold')
+    notes = StringField('Homeowner notes')

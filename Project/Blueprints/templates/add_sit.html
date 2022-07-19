@@ -1,4 +1,35 @@
 {% extends 'home.html' %}
 {% block content %} 
 <h1>ADD SIT</h1>
+<br/>
+<form action="url_for('add_sit')" method="POST">
+    
+    <div>
+        {{ form.new_price_with.label }}
+        {{ form.new_price_with() }}
+    </div>
+    <br/>    
+    <div>
+        {{ form.new_price_without.label }}
+        {{ form.new_price_without() }}
+    </div>
+    <br/>
+    <div>
+        {{ form.offset.label }}
+        {{ form.offset() }}
+    </div>
+    <br/>
+    <div>
+        {{ form.panels.label }}
+        {{ form.panels() }}
+    </div>
+    <br/>
+    <div>
+        {{ form.notes.label }}
+        {{ form.notes() }}
+    </div>
+    <br/>
+
+</form>
+
 {% endblock %}

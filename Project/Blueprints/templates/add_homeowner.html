@@ -3,42 +3,46 @@
 {% block content %}
 
 <h1>
-    ADD A HOMEOWNER! 
+    ADD A HOMEOWNER 
 </h1>
 </br>
 
 <form action="url_for('add_homeowner')" method="POST">
-<div>
-    {{ form.name.label }}
-    {{ form.name() }}
-</div>    
-<div>
-    {{ form.address.label }}
-    {{ form.address() }}
-</div>
-<div>
-    {{ form.phone_number.label }}
-    {{ form.phone_number() }}
-</div>
-<div>
-    {{ form.email.label }}
-    {{ form.email() }}
-</div>
-<div>
-    {{ form.avg_bill.label }}
-    {{ form.avg_bill() }}
-</div>
-<div>
-    {{ form.total_kwh.label }}
-    {{ form.total_kwh() }}
-</div>
-<!-- <div>
-    {{ form.submit_homeowner.label }}
-    {{ form.submit_homeowner() }}
-</div> -->
+    <div>
+        {{ form.name.label }}
+        {{ form.name() }}
+    </div>
+    <br/>    
+    <div>
+        {{ form.address.label }}
+        {{ form.address() }}
+    </div>
+    <br/>
+    <div>
+        {{ form.phone_number.label }}
+        {{ form.phone_number() }}
+    </div>
+    <br/>
+    <div>
+        {{ form.email.label }}
+        {{ form.email() }}
+    </div>
+    <br/>
+    <div>
+        {{ form.avg_bill.label }}
+        {{ form.avg_bill() }}
+    </div>
+    <br/>
+    <div>
+        {{ form.total_kwh.label }}
+        {{ form.total_kwh() }}
+    </div>
+    <!-- <div>
+        {{ form.submit_homeowner.label }}
+        {{ form.submit_homeowner() }}
+    </div> -->
 </form>
 
-
-
-
 {% endblock %}
+
+

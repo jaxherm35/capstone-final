@@ -1,4 +1,53 @@
 {% extends 'home.html' %}
 {% block content %} 
-<h1>ADD SALE</h1>
-{% endblock %}
+<h1>ADD A SALE</h1>
+<br/>
+
+<form action="url_for('add_sale')" method="POST">
+
+    <div>
+        {{ form.new_price_with.label }}
+        {{ form.new_price_with() }}
+    </div>
+    <br/>    
+    <div>
+        {{ form.new_price_without.label }}
+        {{ form.new_price_without() }}
+    </div>
+    <br/>
+    <div>
+        {{ form.offset.label }}
+        {{ form.offset() }}
+    </div>
+    <br/>
+    <div>
+        {{ form.panels.label }}
+        {{ form.panels() }}
+    </div>
+    <br/>
+    <div>
+        {{ form.loan_provider.label }}
+        {{ form.loan_provider() }}
+    </div>
+    <br/>
+    <div>
+        {{ form.interest_rate.label }}
+        {{ form.interest_rate() }}
+    </div>
+    <br/>
+    <div>
+        {{ form.re_roof.label }}
+        {{ form.re_roof() }}
+    </div>
+    <br/>
+    <div>
+        {{ form.date_sold.label }}
+        {{ form.date_sold() }}
+    </div>
+    <br/>
+    <div>
+        {{ form.notes.label }}
+        {{ form.notes() }}
+    </div>
+</form>
+    {% endblock %}
