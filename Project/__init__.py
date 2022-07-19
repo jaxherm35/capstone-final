@@ -15,6 +15,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 Migrate(app, db)
 app.secret_key = "very_secret_key"
+app.config['SECRET_KEY'] = "very_secret_key"
 
 app.jinja_env.undefined = jinja2.StrictUndefined
 

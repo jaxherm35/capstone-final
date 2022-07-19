@@ -9,8 +9,7 @@ def login():
 
 @app.route('/home', methods=['GET'])
 def home():
-    test = ['test 1 ', 'test 2 ', 'test 3']
-    return render_template('home.html', test=test)
+    return render_template('home.html')
 
 if __name__ == '__main__':
     app.run(debug=True)

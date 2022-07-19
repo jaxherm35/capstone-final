@@ -5,8 +5,10 @@
 # from xmlrpc.client import Boolean
 from flask import Flask
 from flask_wtf import FlaskForm
+from psycopg2 import DatabaseError
 from sqlalchemy import Integer
 from wtforms import StringField, SubmitField, IntegerField, BooleanField
+from wtforms.validators import DataRequired
 
 
 class AddUser(FlaskForm):
@@ -17,12 +19,13 @@ class AddUser(FlaskForm):
 
 class AddHomeowner(FlaskForm):
     
-    name = StringField()
-    address = StringField()
-    phone_number = StringField()
-    email = StringField()
-    avg_bill = StringField()
-    total_kwh = StringField()
+    name = StringField('Homeowner name', validators=[DataRequired()])
+    address = StringField('Homeowner address')
+    phone_number = StringField('Homeowner phone number')
+    email = StringField('Homeowner email')
+    avg_bill = StringField('Homeowner avgerage bill')
+    total_kwh = StringField('Homeowner total kwh')
+    submit_homeowner = SubmitField('Add Homeowner')
 
 
 class AddSit(FlaskForm):
@@ -34,7 +37,7 @@ class AddSit(FlaskForm):
     notes = StringField()
 
 
-class AddSales(FlaskForm):
+class AddSale(FlaskForm):
 
     new_price_with = IntegerField()
     new_price_without = IntegerField()

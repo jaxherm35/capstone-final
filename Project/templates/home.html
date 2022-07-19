@@ -12,6 +12,7 @@
 </head>
 {% block content %}
 <body>
+  {% block navbar %}
     <header>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <a class="navbar-brand" href="#">Customer Data Base</a>
@@ -20,18 +21,17 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
           <div class="navbar-nav">
-            <a class="nav-item nav-link active" href="#">Home <span class="sr-only">(current)</span></a>
-            <a class="nav-item nav-link" href="#">Sits</a>
-            <a class="nav-item nav-link" href="#">Sales</a>            
+            <a class="nav-item nav-link active" href="{{ url_for('home') }}">Home <span class="sr-only">(current)</span></a>
+            <a class="nav-item nav-link" href="{{ url_for('solar_db.add_homeowner') }}"">Add a Homeowner</a>
+            <a class="nav-item nav-link" href="{{ url_for('solar_db.add_sit') }}">Add a Sit</a>
+            <a class="nav-item nav-link" href="{{ url_for('solar_db.add_sale') }}">Add a Sale</a>
+            <a class="nav-item nav-link" href="{{ url_for('solar_db.sits') }}">My Sits</a>
+            <a class="nav-item nav-link" href="{{ url_for('solar_db.sales') }}">My Sales</a>             
           </div>
         </div>
     </header>
-        {% for test in test %} 
-        <h1>
-            {{ test }}
-        </h1>
-        {% endfor %}
+    {% endblock %}
       </nav>
-</body>
-{% endblock %}
+    </body>
+    {% endblock %}
 </html>
