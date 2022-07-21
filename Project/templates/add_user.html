@@ -5,7 +5,8 @@
 
     
     <form method="POST">
-        
+        {{ form.hidden_tag() }}
+
         {{ form.username.label }}
         {{ form.username() }}
 
@@ -17,17 +18,8 @@
         
         {{ form.submit() }}
     </form>
-    <h1>Login</h1>
-    <form method="POST">
-        
-        {{ form.username.label }}
-        {{ form.username() }}
-    <br/>
-        {{ form.password.label }}
-        {{ form.password() }}
-    <br/>
-        {{ form.submit() }}
-    </form>
+        <h2>Already have an account?</h2>
+            <a href="{{ url_for('login')}}">Login Here</a>
 </body>
 </head>
 </html>

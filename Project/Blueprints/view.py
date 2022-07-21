@@ -12,30 +12,33 @@ import jinja2
 # from Project.model import connect_to_db
 # from flask_wtf import AddForm
 from Project import app
-from Project.Blueprints.forms import AddUser, AddHomeowner, AddSit, AddSale, LoginForm
+from Project.Blueprints.forms import AddHomeowner, AddSit, AddSale
 from Project.model import *
-from Project.__init__ import login_manager
-from flask_login import login_user
+# from Project.__init__ import login_manager
+# from flask_login import login_user
+# from Project.Blueprints.view import my_blueprint
 
 my_blueprint = Blueprint("solar_db", __name__, template_folder = "templates")
+app.register_blueprint(my_blueprint, url_prefix="/solar_db")
 
-@login_manager.user_loader
-def load_user(user_id):
-    return User.get(user_id)
+# @login_manager.user_loader
+# def load_user(user_id):
+#     return User.get(user_id)
 
-@my_blueprint.route('login', methods=['GET', 'POST'])
-def login():
+
+# @my_blueprint.route('/login', methods=['GET', 'POST'])
+# def login():
     
-    form = LoginForm()
-    if form.validate_on_submit():
-        username = form.username.data
-        password = form.password.data
+#     form = LoginForm()
+#     if form.validate_on_submit():
+#         username = form.username.data
+#         password = form.password.data
 
-        user = User.query.filter_by(username=username, password=password).first()
-        login_user(user)
-        return redirect(url_for('home'))
+#         user = User.query.filter_by(username=username, password=password).first()
+#         login_user(user)
+#         return redirect(url_for('home'))
 
-    return render_template('add_user.html')
+#     return render_template('login.html')
 
 @my_blueprint.route('/sales', methods=['GET'])
 def sales():

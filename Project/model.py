@@ -12,14 +12,18 @@ from flask import Flask
 from sqlalchemy import PrimaryKeyConstraint, ForeignKey
 from flask_debugtoolbar import DebugToolbarExtension
 from Project import db
+from flask_login import UserMixin
 
-class User(db.Model):
+# db = SQLAlchemy()
 
-    __tablename__ = 'user'
 
-    user_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+class Users(db.Model, UserMixin):
+
+    __tablename__ = 'users'
+
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     username = db.Column(db.String(80), unique=True)
-    password = db.Column(db.String(25))
+    password = db.Column(db.String(9999))
    
     
     def __init__(self, username, password):
@@ -53,7 +57,7 @@ class Sits(db.Model):
     __tablename__ = "sits"
 
     sit_id = db.Column(db.Integer(), primary_key=True, autoincrement=True)
-    user_id = db.Column(db.Integer(), ForeignKey("user.user_id"))
+    user_id = db.Column(db.Integer(), ForeignKey("users.id"))
     homeowner_id = db.Column(db.Integer(), ForeignKey("homeowner.homeowner_id"))
     new_price_with = db.Column(db.Integer())
     new_price_without = db.Column(db.Integer())
@@ -100,15 +104,17 @@ class Sold(db.Model):
         self.date_sold = date_sold
         self.notes = notes
 
-# def connect_to_db(app):
-#     app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://Jaxson:sqlpassword@localhost:5432/capstone-final'
-#     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-#     db.app = app
-#     db.init_app(app)
+def connect_to_db(app):
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://Jaxson:sqlpassword@localhost:5432/capstone-final'
+    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+    db.app = app
+    db.init_app(app)
+    db.create_all()
 
 
-# if __name__ == "__main__":
-#     app = Flask(__name__)
-#     connect_to_db(app)
-#     db.create_all()
-#     print("Connected to database")
+if __name__ == "__main__":
+    from flask import Flask
+    app = Flask(__name__)
+    connect_to_db(app)
+    db.create_all()
+    print("Connected to database")
