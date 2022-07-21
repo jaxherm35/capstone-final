@@ -12,8 +12,8 @@
 </head>
 {% block content %}
 <body>
+  <header>
   {% block navbar %}
-    <header>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <a class="navbar-brand" href="#">Customer Data Base</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -25,6 +25,7 @@
             <a class="nav-item nav-link" href="{{ url_for('solar_db.add_homeowner') }}"">Add a Homeowner</a>
             <a class="nav-item nav-link" href="{{ url_for('solar_db.add_sit') }}">Add a Sit</a>
             <a class="nav-item nav-link" href="{{ url_for('solar_db.add_sale') }}">Add a Sale</a>
+            <a class="nav-item nav-link" href="{{ url_for('solar_db.homeowners') }}">My Homeowners</a>
             <a class="nav-item nav-link" href="{{ url_for('solar_db.sits') }}">My Sits</a>
             <a class="nav-item nav-link" href="{{ url_for('solar_db.sales') }}">My Sales</a>             
           </div>
@@ -32,6 +33,9 @@
     </header>
     {% endblock %}
       </nav>
+      <h1>
+        WELCOME TO YOUR SOLAR DATA BASE
+      </h1>
     </body>
     {% endblock %}
 </html>

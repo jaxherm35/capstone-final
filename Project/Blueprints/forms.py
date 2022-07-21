@@ -3,18 +3,26 @@
 # from tokenize import String
 # from unicodedata import name
 # from xmlrpc.client import Boolean
+from click import password_option
 from flask import Flask
 from flask_wtf import FlaskForm
 from psycopg2 import DatabaseError
 from sqlalchemy import Integer
-from wtforms import StringField, SubmitField, IntegerField, BooleanField
-from wtforms.validators import DataRequired
-
+from wtforms import StringField, SubmitField, IntegerField, BooleanField, PasswordField
+from wtforms.validators import DataRequired, Length, EqualTo 
 
 class AddUser(FlaskForm):
 
-    name = StringField()
+    username = StringField('Username', validators=[DataRequired()])
+    password = PasswordField('Password', validators=[DataRequired(), Length(min=7, max=25)])
+    confirm = PasswordField('Confirm Password', validators=[DataRequired('Required'), EqualTo('password', message='Passwords must match')])
+    submit = SubmitField('Submit')
 
+class LoginForm(FlaskForm):
+
+    username = StringField('Username', validators=[DataRequired()])
+    password = PasswordField('Password', validators=[DataRequired(), Length(min=7, max=25)])
+    submit = SubmitField('Submit')
 
 
 class AddHomeowner(FlaskForm):
@@ -35,6 +43,7 @@ class AddSit(FlaskForm):
     offset = IntegerField('Offset percentage')
     panels = IntegerField('Total number of panels')
     notes = StringField('Homeowner notes')
+    submit_sit = SubmitField('Add Sit')
 
 
 class AddSale(FlaskForm):
@@ -48,3 +57,4 @@ class AddSale(FlaskForm):
     re_roof = BooleanField('Requires re-roof')
     date_sold = StringField('Date sold')
     notes = StringField('Homeowner notes')
+    submit_sale = SubmitField('Add Sale')

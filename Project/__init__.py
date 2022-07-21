@@ -7,6 +7,7 @@ import jinja2
 import os 
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
+from flask_login import LoginManager
 
 
 app = Flask(__name__)
@@ -19,6 +20,8 @@ app.config['SECRET_KEY'] = "very_secret_key"
 
 app.jinja_env.undefined = jinja2.StrictUndefined
 
+login_manager = LoginManager()
+login_manager.init_app(app)
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 

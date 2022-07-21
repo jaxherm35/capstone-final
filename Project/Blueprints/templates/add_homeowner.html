@@ -7,7 +7,8 @@
 </h1>
 </br>
 
-<form action="url_for('add_homeowner')" method="POST">
+<form method="POST">
+    {{ form.hidden_tag() }}
     <div>
         {{ form.name.label }}
         {{ form.name() }}
@@ -37,10 +38,10 @@
         {{ form.total_kwh.label }}
         {{ form.total_kwh() }}
     </div>
-    <!-- <div>
-        {{ form.submit_homeowner.label }}
+    <br/>
+    <div>
         {{ form.submit_homeowner() }}
-    </div> -->
+    </div>
 </form>
 
 {% endblock %}

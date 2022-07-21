@@ -1,0 +1,33 @@
+<html>
+<head>
+<body>
+    <h1>Create an Account</h1>
+
+    
+    <form method="POST">
+        
+        {{ form.username.label }}
+        {{ form.username() }}
+
+        {{ form.password.label }}
+        {{ form.password() }}
+
+        {{ form.confirm.label }}
+        {{ form.confirm() }}
+        
+        {{ form.submit() }}
+    </form>
+    <h1>Login</h1>
+    <form method="POST">
+        
+        {{ form.username.label }}
+        {{ form.username() }}
+    <br/>
+        {{ form.password.label }}
+        {{ form.password() }}
+    <br/>
+        {{ form.submit() }}
+    </form>
+</body>
+</head>
+</html>

@@ -5,6 +5,8 @@
 # from hashlib import new
 # from sqlite3 import connect
 # from unicodedata import name
+# from enum import auto
+# from click import password_option
 from flask_sqlalchemy import SQLAlchemy
 from flask import Flask
 from sqlalchemy import PrimaryKeyConstraint, ForeignKey
@@ -15,12 +17,14 @@ class User(db.Model):
 
     __tablename__ = 'user'
 
-    user_id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(80), unique=True)
+    user_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    username = db.Column(db.String(80), unique=True)
+    password = db.Column(db.String(25))
    
     
-    def __init__(self, name):
-        self.name = name
+    def __init__(self, username, password):
+        self.username = username
+        self.password = password
 
 
 class Homeowner(db.Model):
@@ -35,9 +39,9 @@ class Homeowner(db.Model):
     avg_bill = db.Column(db.String(80))
     total_kwh = db.Column(db.String(80))
 
-    def __init__(self, homeowner_id, name, phone_number, email, avg_bill, total_kwh):
-        self.homeowner_id = homeowner_id
+    def __init__(self, name, address, phone_number, email, avg_bill, total_kwh):
         self.name = name
+        self.address = address
         self.phone_number = phone_number
         self.email = email
         self.avg_bill = avg_bill
@@ -48,7 +52,7 @@ class Sits(db.Model):
 
     __tablename__ = "sits"
 
-    sit_id = db.Column(db.Integer(), primary_key=True)
+    sit_id = db.Column(db.Integer(), primary_key=True, autoincrement=True)
     user_id = db.Column(db.Integer(), ForeignKey("user.user_id"))
     homeowner_id = db.Column(db.Integer(), ForeignKey("homeowner.homeowner_id"))
     new_price_with = db.Column(db.Integer())
@@ -59,8 +63,7 @@ class Sits(db.Model):
 
 
 
-    def __init__(self, sit_id, new_price_with, new_price_without, offset, panels, notes):
-        self.sit_id = sit_id
+    def __init__(self, new_price_with, new_price_without, offset, panels, notes):
         self.new_price_with = new_price_with
         self.new_price_without = new_price_without
         self.offset = offset
@@ -73,7 +76,7 @@ class Sold(db.Model):
 
     __tablename__ = "sold"
 
-    sold_id = db.Column(db.Integer(), primary_key=True)
+    sold_id = db.Column(db.Integer(), primary_key=True, autoincrement=True)
     sit_id = db.Column(db.Integer(), ForeignKey("sits.sit_id"))
     new_price_with = db.Column(db.Integer())
     new_price_without = db.Column(db.Integer())
@@ -86,8 +89,7 @@ class Sold(db.Model):
     notes = db.Column(db.String(300))
 
 
-    def __init__(self, sold_id, new_price_with, new_price_without, offset, panels, loan_provider, interest_rate, re_roof, date_sold, notes):
-        self.sold_id = sold_id
+    def __init__(self, new_price_with, new_price_without, offset, panels, loan_provider, interest_rate, re_roof, date_sold, notes):
         self.new_price_with = new_price_with
         self.new_price_without = new_price_without
         self.offset = offset

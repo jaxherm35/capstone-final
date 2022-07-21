@@ -1,32 +1,61 @@
-from audioop import avg
-from ctypes import addressof
-from datetime import date
-from doctest import register_optionflag
-from hashlib import new
-from re import L, S, sub, template
-from unicodedata import name
-from flask import Flask, redirect, render_template, url_for, Blueprint
+# from audioop import avg
+# from ctypes import addressof
+# from datetime import date
+# from doctest import register_optionflag
+# from hashlib import new
+# from re import L, S, sub, template
+# from unicodedata import name
+# from crypt import methods
+from flask import Flask, redirect, render_template, request, url_for, Blueprint
 from flask_debugtoolbar import DebugToolbarExtension
 import jinja2
 # from Project.model import connect_to_db
 # from flask_wtf import AddForm
 from Project import app
-from Project.Blueprints.forms import AddUser, AddHomeowner, AddSit, AddSale
+from Project.Blueprints.forms import AddUser, AddHomeowner, AddSit, AddSale, LoginForm
 from Project.model import *
+from Project.__init__ import login_manager
+from flask_login import login_user
 
 my_blueprint = Blueprint("solar_db", __name__, template_folder = "templates")
 
+@login_manager.user_loader
+def load_user(user_id):
+    return User.get(user_id)
+
+@my_blueprint.route('login', methods=['GET', 'POST'])
+def login():
+    
+    form = LoginForm()
+    if form.validate_on_submit():
+        username = form.username.data
+        password = form.password.data
+
+        user = User.query.filter_by(username=username, password=password).first()
+        login_user(user)
+        return redirect(url_for('home'))
+
+    return render_template('add_user.html')
 
 @my_blueprint.route('/sales', methods=['GET'])
 def sales():
 
+    # sales = sales.query.all()
+    
     return render_template('sales.html')
 
 
 @my_blueprint.route('/sits', methods=['GET'])
 def sits():
     
+    # print(sits.query.all())
+
     return render_template('sits.html')
+
+@my_blueprint.route('/homeowners')
+def homeowners():
+
+    return render_template('homeowners.html')
 
 @my_blueprint.route('/add_homeowner', methods=['GET', 'POST'])
 def add_homeowner():
@@ -40,22 +69,34 @@ def add_homeowner():
     total_kwh = None
 
     form = AddHomeowner()
-    
-    if form.validate_on_submit():
-        name = form.name.data
-        address = form.homeowner_address.data
-        phone_number = form.homeowner_phone_number.data
-        email = form.homeowner_email.data
-        avg_bill = form.homeowner_avg_bill.data
-        total_kwh = form.homeowner_total_kwh.data
-        # submit_homeowner = form.homeowner_submit_homeowner.data
+    if request.method == 'POST':
+        for field in form:
+            print(field.label, field.errors)
+        if form.validate():
+            print('success!')
+            name = form.name.data
+            address = form.address.data
+            phone_number = form.phone_number.data
+            email = form.email.data
+            avg_bill = form.avg_bill.data
+            total_kwh = form.total_kwh.data
+            # submit_homeowner = form.homeowner_submit_homeowner.data
 
-        form.name.data = ''
-        form.address.data = ''
-        form.phone_number.data = ''
-        form.email.data = ''
-        form.avg_bill.data = ''
-        form.total_kwh.data = ''
+            new_homeowner = Homeowner(name, address, phone_number, email, avg_bill, total_kwh)
+            db.session.add(new_homeowner)
+            db.session.commit()
+
+            return redirect(url_for('solar_db.homeowners'))
+    
+        else: 
+            print('curse words') 
+
+        # form.name.data = ''
+        # form.address.data = ''
+        # form.phone_number.data = ''
+        # form.email.data = ''
+        # form.avg_bill.data = ''
+        # form.total_kwh.data = ''
    
     return render_template('add_homeowner.html', form=form, name=name, address=address, phone_number=phone_number, email=email, avg_bill=avg_bill, total_kwh=total_kwh)
 
