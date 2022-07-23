@@ -6,6 +6,7 @@
 # from re import L, S, sub, template
 # from unicodedata import name
 # from crypt import methods
+from turtle import home
 from flask import Flask, redirect, render_template, request, url_for, Blueprint
 from flask_debugtoolbar import DebugToolbarExtension
 import jinja2
@@ -37,8 +38,9 @@ def sits():
 
 @my_blueprint.route('/homeowners', methods=['GET'])
 def homeowners():
+    homeowners = Homeowner.query.all()
 
-    return render_template('homeowners.html')
+    return render_template('homeowners.html', homeowners=homeowners)
 
 @my_blueprint.route('/add_homeowner', methods=['GET', 'POST'])
 def add_homeowner():
@@ -85,17 +87,22 @@ def add_sit():
     form = AddSit()
 
     if form.validate_on_submit():
+        print('Success')
         new_price_with = form.new_price_with.data
         new_price_without = form.new_price_without.data
         offset = form.offset.data
         panels = form.panels.data
         notes= form.notes.data
 
-        form.new_price_with = ''
-        form.new_price_without = ''
-        form.offset = ''
-        form.panels = ''
-        form.notes = ''
+
+        new_sit = Sits(new_price_with, new_price_without, offset, panels, notes)
+        db.session.add(new_sit)
+        db.session.commit()
+
+        return redirect(url_for('/sits'))
+
+    else:
+        print('more curse words')
 
     return render_template('add_sit.html', form=form, new_price_with=new_price_with, new_price_without=new_price_without, offset=offset, panels=panels, notes=notes)
 
