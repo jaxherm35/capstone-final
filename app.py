@@ -1,13 +1,14 @@
 from click import confirm
-from flask import Flask, redirect, render_template, url_for
+from flask import Flask, redirect, render_template, url_for, flash
 from Project.Blueprints.forms import AddUser, LoginForm
 from Project import app
 from Project.model import *
-# from Project import Blueprint
+from Project import Blueprints
 # from Project.__init__ import login_manager
 from flask_login import login_user, login_required, logout_user, current_user, LoginManager
 from Project.Blueprints.view import my_blueprint
 from flask_bcrypt import Bcrypt
+
 
 bcrypt = Bcrypt(app)
 login_manager = LoginManager()
@@ -23,14 +24,15 @@ def add_user():
 
     username = None
     password = None
-    confirm = None
+    
 
     form = AddUser()
 
     if form.validate_on_submit():
+        print('Successfully added user')
         username = form.username.data
         password = form.password.data
-        confirm = form.confirm.data
+        
 
         hashed_password = bcrypt.generate_password_hash(form.password.data)
         new_user = Users(username=username, password=hashed_password)
@@ -38,34 +40,36 @@ def add_user():
 
         db.session.add(new_user)
         db.session.commit()
+        flash('New User Added Successfully!')
 
         return redirect(url_for('home'))
 
-    return render_template('add_user.html', form=form, username=username, password=password, confirm=confirm)
+    return render_template('add_user.html', form=form, username=form.username.data, password=password)
 
 
 
-@app.route('/login', methods=['GET', 'POST'])
+@app.route('/', methods=['GET', 'POST'])
 def login():
     
     form = LoginForm()
-    if form.validate_on_submit():
-        username = form.username.data
-        password = form.password.data
-
+    if form.validate_on_submit():   
         user = Users.query.filter_by(username=form.username.data).first()
         if user:
             if bcrypt.check_password_hash(user.password, form.password.data):
                 login_user(user)
+
                 return redirect(url_for('home'))
 
-    return render_template('login.html', form=form, username=username, password=password)
+    return render_template('add_user.html', form=form, username=form.username.data, password=form.password.data)
 
 
 @app.route('/home', methods=['GET'])
-@login_required
 def home():
     return render_template('home.html')
+
+@app.route('/test', methods=['GET'])
+def test():
+    return render_template('test.html')
 
 if __name__ == '__main__':
     app.run(debug=True)

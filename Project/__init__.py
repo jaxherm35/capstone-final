@@ -27,5 +27,5 @@ app.jinja_env.undefined = jinja2.StrictUndefined
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 
-# from Project.Blueprints.view import my_blueprint
-# app.register_blueprint(my_blueprint, url_prefix="/solar_db")
+from Project.Blueprints.view import my_blueprint
+app.register_blueprint(my_blueprint, url_prefix="/solar_db")

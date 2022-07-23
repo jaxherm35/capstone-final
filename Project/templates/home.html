@@ -11,31 +11,30 @@
     <title>Homepage</title>
 </head>
 {% block content %}
-<body>
-  <header>
-  {% block navbar %}
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="#">Customer Data Base</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-          <div class="navbar-nav">
-            <a class="nav-item nav-link active" href="{{ url_for('home') }}">Home <span class="sr-only">(current)</span></a>
-            <a class="nav-item nav-link" href="{{ url_for('solar_db.add_homeowner') }}"">Add a Homeowner</a>
-            <a class="nav-item nav-link" href="{{ url_for('solar_db.add_sit') }}">Add a Sit</a>
-            <a class="nav-item nav-link" href="{{ url_for('solar_db.add_sale') }}">Add a Sale</a>
-            <a class="nav-item nav-link" href="{{ url_for('solar_db.homeowners') }}">My Homeowners</a>
-            <a class="nav-item nav-link" href="{{ url_for('solar_db.sits') }}">My Sits</a>
-            <a class="nav-item nav-link" href="{{ url_for('solar_db.sales') }}">My Sales</a>             
-          </div>
-        </div>
-    </header>
-    {% endblock %}
-      </nav>
+<header>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">Customer Data Base</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <a class="nav-item nav-link active" href="{{ url_for('home') }}">Home <span class="sr-only">(current)</span></a>
+        <a class="nav-item nav-link" href="{{ url_for('solar_db.add_homeowner') }}">Add a Homeowner</a>
+        <a class="nav-item nav-link" href="{{ url_for('solar_db.add_sit') }}">Add a Sit</a>
+        <a class="nav-item nav-link" href="{{ url_for('solar_db.add_sale') }}">Add a Sale</a>
+        <a class="nav-item nav-link" href="{{ url_for('solar_db.homeowners') }}">My Homeowners</a>
+        <a class="nav-item nav-link" href="{{ url_for('solar_db.sits') }}">My Sits</a>
+        <a class="nav-item nav-link" href="{{ url_for('solar_db.sales') }}">My Sales</a>            
+      </div>
+    </div>
+  </nav>
+  </header>
+{% endblock %}    
+    <body>
       <h1>
         WELCOME TO YOUR SOLAR DATA BASE
       </h1>
     </body>
-    {% endblock %}
+    
 </html>

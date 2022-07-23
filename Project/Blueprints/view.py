@@ -14,31 +14,11 @@ import jinja2
 from Project import app
 from Project.Blueprints.forms import AddHomeowner, AddSit, AddSale
 from Project.model import *
-# from Project.__init__ import login_manager
-# from flask_login import login_user
-# from Project.Blueprints.view import my_blueprint
+# from app import my_blueprint
 
 my_blueprint = Blueprint("solar_db", __name__, template_folder = "templates")
-app.register_blueprint(my_blueprint, url_prefix="/solar_db")
+# app.register_blueprint(my_blueprint, url_prefix="/solar_db")
 
-# @login_manager.user_loader
-# def load_user(user_id):
-#     return User.get(user_id)
-
-
-# @my_blueprint.route('/login', methods=['GET', 'POST'])
-# def login():
-    
-#     form = LoginForm()
-#     if form.validate_on_submit():
-#         username = form.username.data
-#         password = form.password.data
-
-#         user = User.query.filter_by(username=username, password=password).first()
-#         login_user(user)
-#         return redirect(url_for('home'))
-
-#     return render_template('login.html')
 
 @my_blueprint.route('/sales', methods=['GET'])
 def sales():
@@ -55,7 +35,7 @@ def sits():
 
     return render_template('sits.html')
 
-@my_blueprint.route('/homeowners')
+@my_blueprint.route('/homeowners', methods=['GET'])
 def homeowners():
 
     return render_template('homeowners.html')
@@ -63,7 +43,6 @@ def homeowners():
 @my_blueprint.route('/add_homeowner', methods=['GET', 'POST'])
 def add_homeowner():
 
-    
     name = None
     address = None
     phone_number = None
@@ -72,34 +51,25 @@ def add_homeowner():
     total_kwh = None
 
     form = AddHomeowner()
-    if request.method == 'POST':
-        for field in form:
-            print(field.label, field.errors)
-        if form.validate():
-            print('success!')
-            name = form.name.data
-            address = form.address.data
-            phone_number = form.phone_number.data
-            email = form.email.data
-            avg_bill = form.avg_bill.data
-            total_kwh = form.total_kwh.data
-            # submit_homeowner = form.homeowner_submit_homeowner.data
 
-            new_homeowner = Homeowner(name, address, phone_number, email, avg_bill, total_kwh)
-            db.session.add(new_homeowner)
-            db.session.commit()
+    if form.validate_on_submit():
+        print('Success')
+        name = form.name.data
+        address = form.address.data
+        phone_number = form.phone_number.data
+        email = form.email.data
+        avg_bill = form.avg_bill.data
+        total_kwh = form.total_kwh.data
+            
 
-            return redirect(url_for('solar_db.homeowners'))
+        new_homeowner = Homeowner(name, address, phone_number, email, avg_bill, total_kwh)
+        db.session.add(new_homeowner)
+        db.session.commit()
+
+        return redirect(url_for('solar_db.homeowners'))
     
-        else: 
-            print('curse words') 
-
-        # form.name.data = ''
-        # form.address.data = ''
-        # form.phone_number.data = ''
-        # form.email.data = ''
-        # form.avg_bill.data = ''
-        # form.total_kwh.data = ''
+    else: 
+        print('curse words') 
    
     return render_template('add_homeowner.html', form=form, name=name, address=address, phone_number=phone_number, email=email, avg_bill=avg_bill, total_kwh=total_kwh)
 

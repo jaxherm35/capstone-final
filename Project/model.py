@@ -104,17 +104,17 @@ class Sold(db.Model):
         self.date_sold = date_sold
         self.notes = notes
 
-def connect_to_db(app):
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://Jaxson:sqlpassword@localhost:5432/capstone-final'
-    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-    db.app = app
-    db.init_app(app)
-    db.create_all()
+# def connect_to_db(app):
+#     app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://Jaxson:sqlpassword@localhost:5432/capstone-final'
+#     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+#     db.app = app
+#     db.init_app(app)
+#     db.create_all()
 
 
-if __name__ == "__main__":
-    from flask import Flask
-    app = Flask(__name__)
-    connect_to_db(app)
-    db.create_all()
-    print("Connected to database")
+# if __name__ == "__main__":
+#     from flask import Flask
+#     app = Flask(__name__)
+#     connect_to_db(app)
+#     db.create_all()
+#     print("Connected to database")
