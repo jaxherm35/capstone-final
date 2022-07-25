@@ -22,7 +22,6 @@ class LoginForm(FlaskForm):
 
     username = StringField('Username', validators=[DataRequired()])
     password = PasswordField('Password', validators=[DataRequired(), Length(min=7, max=25)])
-    confirm = PasswordField('Confirm Password', validators=[DataRequired('Required'), EqualTo('password', message='Passwords must match')])
     submit = SubmitField('Submit')
 
 
