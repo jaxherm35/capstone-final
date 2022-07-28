@@ -3,7 +3,14 @@
 <h1>ADD SIT</h1>
 <br/>
 <form method="POST">
-    
+    <div>
+        {{ sits.users.id}}
+    </div>
+    <div>
+        {{ form.homeowner_id.label }}
+        {{ form.homeowner_id() }}
+    </div>
+    <br/>
     <div>
         {{ form.new_price_with.label }}
         {{ form.new_price_with() }}

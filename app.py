@@ -6,7 +6,7 @@ from Project import app
 from Project.model import *
 from Project import Blueprints
 # from Project.__init__ import login_manager
-from flask_login import login_user, login_required, logout_user, current_user, LoginManager
+from flask_login import current_user, login_user, login_required, logout_user, LoginManager
 from Project.Blueprints.view import my_blueprint
 from flask_bcrypt import Bcrypt, generate_password_hash, check_password_hash
 

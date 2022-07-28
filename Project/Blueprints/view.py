@@ -16,6 +16,7 @@ from Project import app
 from Project.Blueprints.forms import AddHomeowner, AddSit, AddSale
 from Project.model import *
 # from app import my_blueprint
+from flask_login import current_user
 
 my_blueprint = Blueprint("solar_db", __name__, template_folder = "templates")
 # app.register_blueprint(my_blueprint, url_prefix="/solar_db")
@@ -88,6 +89,8 @@ def add_sit():
 
     if form.validate_on_submit():
         print('Success')
+        setter = current_user.id
+        homeowner_id = form.homeowner_id.data
         new_price_with = form.new_price_with.data
         new_price_without = form.new_price_without.data
         offset = form.offset.data
@@ -95,7 +98,7 @@ def add_sit():
         notes= form.notes.data
 
 
-        new_sit = Sits(new_price_with, new_price_without, offset, panels, notes)
+        new_sit = Sits(sits=sits, user_id=setter, homeowner_id=homeowner_id, new_price_with=new_price_with, new_price_without=new_price_without, offset=offset, panels=panels, notes=notes)
         db.session.add(new_sit)
         db.session.commit()
 

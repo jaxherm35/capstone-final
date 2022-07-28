@@ -3,6 +3,7 @@
 # from tokenize import String
 # from unicodedata import name
 # from xmlrpc.client import Boolean
+from ast import In
 from click import password_option
 from flask import Flask
 from flask_wtf import FlaskForm
@@ -38,6 +39,7 @@ class AddHomeowner(FlaskForm):
 
 class AddSit(FlaskForm):
 
+    homeowner_id = IntegerField('Homeowner id', validators=[DataRequired()])
     new_price_with = IntegerField('New price with tax return paydown')
     new_price_without = IntegerField('New price without tax return paydown')
     offset = IntegerField('Offset percentage')

@@ -24,7 +24,7 @@ class Users(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     username = db.Column(db.String(80), unique=True)
     password = db.Column(db.String(9999))
-   
+
     
     def __init__(self, username, password):
         self.username = username
@@ -65,7 +65,8 @@ class Sits(db.Model):
     panels = db.Column(db.Integer())
     notes = db.Column(db.String(300))
 
-
+    user = db.relationship('Users', backref='user')
+    homeowner = db.relationship('Homeowner', backref='homeowner')
 
     def __init__(self, new_price_with, new_price_without, offset, panels, notes):
         self.new_price_with = new_price_with
@@ -92,6 +93,7 @@ class Sold(db.Model):
     date_sold = db.Column(db.String(30))
     notes = db.Column(db.String(300))
 
+    sit = db.relationship("Sits", backref="sits")
 
     def __init__(self, new_price_with, new_price_without, offset, panels, loan_provider, interest_rate, re_roof, date_sold, notes):
         self.new_price_with = new_price_with
@@ -109,12 +111,12 @@ class Sold(db.Model):
 #     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 #     db.app = app
 #     db.init_app(app)
-#     db.create_all()
+db.create_all()
 
 
 # if __name__ == "__main__":
 #     from flask import Flask
 #     app = Flask(__name__)
-#     connect_to_db(app)
+#     # connect_to_db(app)
 #     db.create_all()
 #     print("Connected to database")

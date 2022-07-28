@@ -1,0 +1,12 @@
+h1 {
+    font-size: large;
+    flex-wrap: wrap;
+}
+.register {
+    border: 5px solid blue;
+    position: fixed
+}
+
+.login-link {
+    font-style: italic;
+}

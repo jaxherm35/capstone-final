@@ -18,7 +18,7 @@ Migrate(app, db)
 db.create_all()
 app.secret_key = "very_secret_key"
 app.config['SECRET_KEY'] = "very_secret_key"
-
+db.init_app(app)
 app.jinja_env.undefined = jinja2.StrictUndefined
 
 # login_manager = LoginManager()
